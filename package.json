@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "johnny-five": "^2.0.0",
+    "serialport": "^8.0.8",
+    "socket.io": "^4.0.1"
+  }
+}
