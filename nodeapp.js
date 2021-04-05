@@ -28,17 +28,12 @@ board.on("ready", function() {
   })
 });
 
-const handlePotValue = () => {
-  return { message: `Value has changed to ${potValue}` }
-}
-
-
 //io
 
 io.on('connection', (socket) => {
   console.log('client connected')
   console.log(`Socket ID = ${socket.id}`)
-  setInterval(function() {
+  setInterval(() => {
     socket.emit('potValue', potValue)
   },1000)
   // setInterval(() => socket.emit('potValue', handlePotValue),1000)
