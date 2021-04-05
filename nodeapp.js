@@ -3,12 +3,14 @@ const path = require('path')
 const app = express()
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
+const { Board, Led, Sensor } = require("johnny-five")
 
+//globals
 let oldPotValue
 let potValue = 0
 
 //johnny five
-const { Board, Led, Sensor } = require("johnny-five")
+
 const board = new Board({
   port: "com3"
 });
@@ -26,11 +28,20 @@ board.on("ready", function() {
   })
 });
 
+const handlePotValue = () => {
+  return { message: `Value has changed to ${potValue}` }
+}
+
+
 //io
 
 io.on('connection', (socket) => {
   console.log('client connected')
   console.log(`Socket ID = ${socket.id}`)
+  setInterval(function() {
+    socket.emit('potValue', potValue)
+  },1000)
+  // setInterval(() => socket.emit('potValue', handlePotValue),1000)
   socket.on('disconnect', () => {
     console.log('client disconnected')
   })

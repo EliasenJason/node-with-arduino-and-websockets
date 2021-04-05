@@ -1,6 +1,12 @@
-const socket = io() //https://socket.io/docs/v3/client-initialization/
+
+//https://socket.io/docs/v3/client-initialization/
+const socket = io() 
 
 socket.on('connect', () => {
     console.log(socket.id)
 })
-console.log('i am connected')
+
+socket.on('potValue', (data) => {
+    document.getElementById('potValue').innerHTML = data
+    console.log(data)
+})
