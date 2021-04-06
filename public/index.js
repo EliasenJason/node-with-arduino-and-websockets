@@ -19,31 +19,22 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
 
-var data = google.visualization.arrayToDataTable([
-    ['Label', 'Value'],
-    ['My Potentiometer', 0],
-]);
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['My Potentiometer', 0],
+    ]);
 
-var options = {
-    width: 1400, height: 1120,
-    min: 0, max: 1024,
-    minorTicks: 5
-};
+    var options = {
+        width: 1000, height: 800,
+        min: 0, max: 1024,
+    };
 
-var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 
-chart.draw(data, options);
-
-setInterval(function() {
-    data.setValue(0, 1, potValue);
     chart.draw(data, options);
-}, 100);
-setInterval(function() {
-    data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-    chart.draw(data, options);
-}, 5000);
-setInterval(function() {
-    data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-    chart.draw(data, options);
-}, 26000);
+
+    setInterval(function() {
+        data.setValue(0, 1, potValue);
+        chart.draw(data, options);
+    }, 100);
 }

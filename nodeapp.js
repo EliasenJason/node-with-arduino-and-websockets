@@ -36,7 +36,6 @@ io.on('connection', (socket) => {
   setInterval(() => {
     socket.emit('potValue', potValue)
   },1000)
-  // setInterval(() => socket.emit('potValue', handlePotValue),1000)
   socket.on('disconnect', () => {
     console.log('client disconnected')
   })
